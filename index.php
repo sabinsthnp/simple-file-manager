@@ -324,6 +324,12 @@ $(function(){
 		return false;
 	});
 
+	$('#table').on('click','.unzip',function(data) {
+		$.post("",{'do':'unzip',file:$(this).attr('data-file'),xsrf:XSRF},function(response){
+			list();
+		},'json');
+		return false;
+	});
 	$('#mkdir').submit(function(e) {
 		var hashval = decodeURIComponent(window.location.hash.substr(1)),
 			$dir = $(this).find('[name=name]');
