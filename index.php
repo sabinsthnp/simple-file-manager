@@ -129,6 +129,17 @@ if($_GET['do'] == 'list') {
 	ob_flush();
 	readfile($file);
 	exit;
+}elseif ($_POST['do'] == 'unzip') {
+    $zip = new ZipArchive;
+    $res = $zip->open($file);
+    if ($res === TRUE) {
+        $zip->extractTo(dirname($file));
+        $zip->close();
+        echo json_encode(['success' => true]);
+    } else {
+        echo json_encode(['success' => false]);
+    }
+    exit;
 }
 
 function is_entry_ignored($entry, $allow_show_folders, $hidden_patterns) {
@@ -416,6 +427,7 @@ $(function(){
 		var $dl_link = $('<a/>').attr('href','?do=download&file='+ encodeURIComponent(data.path))
 			.addClass('download').text('download');
 		var $delete_link = $('<a href="#" />').attr('data-file',data.path).addClass('delete').text('delete');
+		var $unzip_link = $('<a href="#" />').attr('data-file',data.path).addClass('unzips').text('unzip');
 		var perms = [];
 		if(data.is_readable) perms.push('read');
 		if(data.is_writable) perms.push('write');
@@ -427,7 +439,7 @@ $(function(){
 				.html($('<span class="size" />').text(formatFileSize(data.size))) )
 			.append( $('<td/>').attr('data-sort',data.mtime).text(formatTimestamp(data.mtime)) )
 			.append( $('<td/>').text(perms.join('+')) )
-			.append( $('<td/>').append($dl_link).append( data.is_deleteable ? $delete_link : '') )
+			.append( $('<td/>').append($dl_link).append($unzip_link).append( data.is_deleteable ? $delete_link : '') )
 		return $html;
 	}
 	function renderBreadcrumbs(path) {
