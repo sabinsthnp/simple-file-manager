@@ -427,7 +427,7 @@ $(function(){
 		var $dl_link = $('<a/>').attr('href','?do=download&file='+ encodeURIComponent(data.path))
 			.addClass('download').text('download');
 		var $delete_link = $('<a href="#" />').attr('data-file',data.path).addClass('delete').text('delete');
-		var $unzip_link = $('<a href="#" />').attr('data-file',data.path).addClass('unzips').text('unzip');
+		var $unzip_link = $('<a href="#" />').attr('data-file',data.path).addClass('unzip').text('unzip');
 		var perms = [];
 		if(data.is_readable) perms.push('read');
 		if(data.is_writable) perms.push('write');
