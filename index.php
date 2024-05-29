@@ -137,8 +137,7 @@ $(function() {
     });
 });
 </script>
-</body>
-</html>
+
 
 <?php
 /********************************
@@ -355,3 +354,5 @@ function err($code, $msg)
     exit;
 }
 ?>
+</body>
+</html>
