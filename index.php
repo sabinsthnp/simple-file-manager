@@ -43,13 +43,7 @@ if($PASSWORD) {
 
 				<input type=password placeholder=Password name=p autofocus class="w-full p-3 rounded-md border-2 border-r-white rounded-r-none border-gray-300 placeholder-gray-500  placeholder-gray-300  bg-gray-500 text-gray-300  border-none"  />
 	   
-			<button
-			type="submit"
-				class="inline-flex items-center gap-2 bg-blue-700 text-white text-lg font-semibold py-3 px-6 rounded-r-md">
-				<span>OK</span>
-			   
-				</span>
-			</button>
+			
 			</form>
 		</div>
 	
