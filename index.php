@@ -1,39 +1,40 @@
 <!doctype html>
-<html>
+<html lang="en">
 <head>
 <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>File Manager</title>
-<style>
-/* Add your styles here */
-</style>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
 </head>
-<body>
-<div id="top">
-  <form id="mkdir" action="?" method="post">
-    <label for="dirname">Create Folder: </label><input id="dirname" name="name" type="text">
-    <input type="submit" value="Create">
-  </form>
-  <form id="file_drop_target" enctype="multipart/form-data" method="post" action="?">
-    <input type="hidden" name="do" value="upload">
-    <input type="hidden" name="xsrf" value="<?=$_COOKIE['_sfm_xsrf']?>">
-    <input type="file" name="file_data[]" multiple>
-    <input type="submit" value="Upload">
-  </form>
-  <button id="unzip_button" style="display: none;">Unzip</button>
+<body class="bg-gray-100 text-gray-800">
+<div class="container mx-auto p-4">
+  <div id="top" class="flex justify-between items-center mb-4">
+    <form id="mkdir" action="?" method="post" class="flex items-center space-x-2">
+      <label for="dirname" class="font-semibold">Create Folder: </label>
+      <input id="dirname" name="name" type="text" class="p-2 border rounded">
+      <input type="submit" value="Create" class="p-2 bg-blue-500 text-white rounded cursor-pointer">
+    </form>
+    <form id="file_drop_target" enctype="multipart/form-data" method="post" action="?" class="flex items-center space-x-2">
+      <input type="hidden" name="do" value="upload">
+      <input type="hidden" name="xsrf" value="<?=$_COOKIE['_sfm_xsrf']?>">
+      <input type="file" name="file_data[]" multiple class="p-2 border rounded">
+      <input type="submit" value="Upload" class="p-2 bg-green-500 text-white rounded cursor-pointer">
+    </form>
+  </div>
+  <div id="breadcrumb" class="mb-4 text-sm">&nbsp;</div>
+  <table id="list" class="min-w-full bg-white border border-gray-300">
+    <thead>
+      <tr class="bg-gray-200">
+        <th class="py-2 px-4 border-b">Name</th>
+        <th class="py-2 px-4 border-b">Size</th>
+        <th class="py-2 px-4 border-b">Modified</th>
+        <th class="py-2 px-4 border-b">Permissions</th>
+        <th class="py-2 px-4 border-b">Actions</th>
+      </tr>
+    </thead>
+    <tbody id="list_body"></tbody>
+  </table>
 </div>
-<div id="breadcrumb">&nbsp;</div>
-<table id="list">
-<thead>
-<tr>
-<th>Name</th>
-<th>Size</th>
-<th>Modified</th>
-<th>Permissions</th>
-<th>Actions</th>
-</tr>
-</thead>
-<tbody id="list_body"></tbody>
-</table>
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 <script>
 /* JavaScript and jQuery code */
