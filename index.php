@@ -317,12 +317,19 @@ $(function(){
 	$(window).on('hashchange',list).trigger('hashchange');
 	$('#table').tablesorter();
 
-	$('#table').on('click','.delete',function(data) {
-		$.post("",{'do':'delete',file:$(this).attr('data-file'),xsrf:XSRF},function(response){
-			list();
-		},'json');
-		return false;
-	});
+	$('#table').on('click', '.delete', function() {
+    var fileName = $(this).attr('data-file');
+    var userConfirmation = prompt("To confirm deletion, please type the file name: " + fileName);
+    
+    if (userConfirmation === fileName) {
+        $.post("", {'do': 'delete', 'file': fileName, 'xsrf': XSRF}, function(response) {
+            list();
+        }, 'json');
+    } else {
+        alert("File name does not match. Deletion cancelled.");
+    }
+    return false;
+});
 
 	$('#table').on('click','.unzip',function(data) {
 		$.post("",{'do':'unzip',file:$(this).attr('data-file'),xsrf:XSRF},function(response){
@@ -508,5 +515,4 @@ $(function(){
 </tr></thead><tbody id="list">
 
 </tbody></table>
-<footer>simple php filemanager by <a href="https://github.com/jcampbell1">jcampbell1</a></footer>
 </body></html>
