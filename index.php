@@ -489,6 +489,8 @@ $(function(){
 
 </script>
 </head><body>
+<img src="/logo.png" alt="Logo" width="200px" height=""/>
+
 <div id="top">
    <?php if($allow_create_folder): ?>
 	<form action="?" method="post" id="mkdir" />
@@ -506,7 +508,6 @@ $(function(){
 		<input type="file" multiple />
 	</div>
    <?php endif; ?>
-   <img src="/logo.png" alt="Logo" />
 	<div id="breadcrumb">&nbsp;</div>
 </div>
 
