@@ -489,7 +489,7 @@ $(function(){
 
 </script>
 </head><body>
-<img src="/logo.png" alt="Logo" width="200px" height=""/>
+<img src="/logo.png" alt="Logo" width="200px" />
 
 <div id="top">
    <?php if($allow_create_folder): ?>
