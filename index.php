@@ -19,7 +19,7 @@ $allow_show_folders = true; // Set to false to hide all subdirectories
 $disallowed_patterns = ['*.php'];  // must be an array.  Matching files not allowed to be uploaded
 $hidden_patterns = ['*.php','.*']; // Matching files hidden in directory index
 
-$PASSWORD = '';  // Set the password, to access the file manager... (optional)
+$PASSWORD = 'RWS101Files';  // Set the password, to access the file manager... (optional)
 
 if($PASSWORD) {
 
