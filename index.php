@@ -33,8 +33,10 @@ if($PASSWORD) {
 		}
 		echo '<html>
 		<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-		<body class="bg-dark"><div class="h-screen flex w-full justify-center items-center  bg-gray-800">
+		<body class="bg-dark">
 		<img src="/logo.png" alt="Logo" width="200px" />
+
+		<div class="h-screen flex w-full justify-center items-center  bg-gray-800">
 
 		<div class="flex relative rounded-md w-full px-4 max-w-xl">
 			<form action=? method="post">
