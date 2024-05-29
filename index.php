@@ -502,6 +502,7 @@ $(function(){
 		<input type="file" multiple />
 	</div>
    <?php endif; ?>
+   <img src="logo.png" alt="Logo" />
 	<div id="breadcrumb">&nbsp;</div>
 </div>
 
