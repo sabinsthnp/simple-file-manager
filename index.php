@@ -37,6 +37,8 @@ if($PASSWORD) {
 
 		<div class="flex relative rounded-md w-full px-4 max-w-xl">
 			<form action=? method="post">
+<img src="/logo.png" alt="Logo" width="200px" />
+
 				<input type=password placeholder=Password name=p autofocus class="w-full p-3 rounded-md border-2 border-r-white rounded-r-none border-gray-300 placeholder-gray-500 dark:placeholder-gray-300 dark:bg-gray-500dark:text-gray-300 dark:border-none"  /></form>
 	   
 			<button
