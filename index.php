@@ -38,7 +38,7 @@ if($PASSWORD) {
 
 		<div class="h-screen flex w-full justify-center items-center  bg-gray-800">
 
-		<div class="flex relative rounded-md w-full px-4 max-w-xl">
+		<div class="flex relative rounded-md w-full px-4 max-w-5xl">
 			<form action=? method="post">
 
 				<input type=password placeholder=Password name=p autofocus class="w-full p-3 rounded-md border-2 border-r-white rounded-r-none border-gray-300 placeholder-gray-500  placeholder-gray-300  bg-gray-500 text-gray-300  border-none"  />
