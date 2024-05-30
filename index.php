@@ -45,7 +45,6 @@ if($PASSWORD) {
 	   
 			
 			</form>
-			<input id="git_url" type="text" placeholder="giturl" onenter="gitClone" /><button onclick="gitClone"/>
 		</div>
 	
 	</div></body></html>';
@@ -524,6 +523,8 @@ $(function(){
 
 <div id="top">
    <?php if($allow_create_folder): ?>
+	<input id="git_url" type="text" placeholder="giturl" onenter="gitClone()" /><button onclick="gitClone()"/>
+
 	<form action="?" method="post" id="mkdir" />
 		<label for=dirname>Create New Folder</label><input id=dirname type=text name=name value="" />
 		<input type="submit" value="create" />
@@ -537,6 +538,7 @@ $(function(){
 		Drag Files Here To Upload
 		<b>or</b>
 		<input type="file" multiple />
+		
 	</div>
    <?php endif; ?>
 	<div id="breadcrumb">&nbsp;</div>
