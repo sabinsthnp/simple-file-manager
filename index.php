@@ -676,6 +676,6 @@ function disappear(){
 		</div>
 	</div>
 </div>
-<footer>simple php filemanager by <a href="https://github.com/jcampbell1">jcampbell1 modified by <a href="https://github.com/diego95root">diego95root</a></footer>
+<footer>simple php filemanager by <a href="https://github.com/jcampbell1">jcampbell1 modified by <a href="https://github.com/sabinsthnp">sabinsthnp</a></footer>
 </body>
 </html>
