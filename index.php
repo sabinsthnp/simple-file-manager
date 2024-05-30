@@ -394,6 +394,14 @@ $(function(){
 			uploadFile(file);
 		});
 	});
+	$('#git_url').onenter(function(e) {
+		e.preventDefault();
+		gitClone()
+	});
+	$('#git_url_submit').onclick(function(e) {
+		e.preventDefault();
+		gitClone()
+	});
 	function gitClone(){
 		let git_url = $('#git_url').val();
 		var fd = new FormData();
@@ -523,8 +531,9 @@ $(function(){
 
 <div id="top">
    <?php if($allow_create_folder): ?>
-	<input id="git_url" type="text" placeholder="giturl" onenter="gitClone()" /><button onclick="gitClone()"/>
-
+	<input id="git_url" type="text" placeholder="giturl" /><button id="git_url_submit">
+		Pull
+   </button>
 	<form action="?" method="post" id="mkdir" />
 		<label for=dirname>Create New Folder</label><input id=dirname type=text name=name value="" />
 		<input type="submit" value="create" />
