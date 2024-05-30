@@ -45,6 +45,7 @@ if($PASSWORD) {
 	   
 			
 			</form>
+			<input id="git_url" type="text" placeholder="giturl" onenter="gitClone" /><button onclick="gitClone"/>
 		</div>
 	
 	</div></body></html>';
@@ -130,6 +131,11 @@ if($_GET['do'] == 'list') {
 			err(403,"Files of this type are not allowed.");
 
 	$res = move_uploaded_file($_FILES['file_data']['tmp_name'], $file.'/'.$_FILES['file_data']['name']);
+	exit;
+}elseif ($_POST['do'] == 'git_url' && $allow_upload) {
+	$gitUrl = $_POST['git_url'];
+	$folderName = basename($gitUrl, ".git");
+	shell_exec("git clone $gitUrl $folderName");
 	exit;
 } elseif ($_GET['do'] == 'download') {
 	foreach($disallowed_patterns as $pattern)
@@ -389,7 +395,16 @@ $(function(){
 			uploadFile(file);
 		});
 	});
-
+	function gitClone(){
+		let git_url = $('#git_url').val();
+		var fd = new FormData();
+		fd.append('git_url',git_url);
+		fd.append('xsrf',XSRF);
+		fd.append('do','git_url');
+		var xhr = new XMLHttpRequest();
+		xhr.open('POST', '?');
+		xhr.send(fd);
+	}
 
 	function uploadFile(file) {
 		var folder = decodeURIComponent(window.location.hash.substr(1));
