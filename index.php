@@ -147,22 +147,43 @@ if($_GET['do'] == 'list') {
 	readfile($file);
 	exit;
 }elseif ($_POST['do'] == 'unzip') {
-    $folder = $_POST['folder'];
-    $zip = new ZipArchive;
-    $res = $zip->open($file);
-    if ($res === TRUE) {
-        $extractPath = $folder;
-        if (!is_dir($extractPath)) {
-            mkdir($extractPath, 0777, true);
-        }
-        $zip->extractTo($extractPath);
-        $zip->close();
-        echo json_encode(['success' => true]);
-    } else {
-        echo json_encode(['success' => false, 'error' => 'Failed to open ZIP file']);
-    }
-    exit;
-}
+	$folder = $_POST['folder']; // Assuming 'mynewwebsite'
+	$zip = new ZipArchive;
+	$res = $zip->open($file);
+  
+	if ($res === TRUE) {
+	  // Extract all files directly to the target folder
+	  $extractPath = $folder;
+  
+	  // Loop through each entry in the archive
+	  for ($i = 0; $i < $zip->numFiles; $i++) {
+		$entry = $zip->getNameIndex($i);
+		$fileInfo = pathinfo($entry);
+  
+		// Skip the folder with the same name as the zip file (MyTemplate)
+		if ($fileInfo['filename'] === 'WordPress') {
+		  continue;
+		}
+  
+		// Extract the file to the target folder
+		$newFilePath = $extractPath . '/' . $entry;
+		$zip->extractTo($extractPath, [$entry]); // Extract only the specified entry
+  
+		// Check for extraction errors
+		if (!$zip->getStatus()) {
+		  echo json_encode(['success' => false, 'error' => 'Failed to extract file: ' . $entry]);
+		  exit;
+		}
+	  }
+  
+	  $zip->close();
+	  echo json_encode(['success' => true]);
+	} else {
+	  echo json_encode(['success' => false, 'error' => 'Failed to open ZIP file']);
+	}
+  
+	exit;
+  }
 
 
 if(!$_COOKIE['_sfm_xsrf'])
