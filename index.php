@@ -151,25 +151,11 @@ if($_GET['do'] == 'list') {
     $zip = new ZipArchive;
     $res = $zip->open($file);
     if ($res === TRUE) {
-        $extractPath = dirname($file) . '/' . $folder;
+        $extractPath = $folder;
         if (!is_dir($extractPath)) {
             mkdir($extractPath, 0777, true);
         }
-        for ($i = 0; $i < $zip->numFiles; $i++) {
-            $filename = $zip->getNameIndex($i);
-            $fileinfo = pathinfo($filename);
-            $zip->extractTo($extractPath, array($filename));
-            if (is_file("$extractPath/{$fileinfo['basename']}")) {
-                rename("$extractPath/{$fileinfo['basename']}", "$extractPath/{$fileinfo['basename']}");
-            } else {
-                $files = glob("$extractPath/$filename/*");
-                foreach ($files as $file) {
-                    $file_basename = basename($file);
-                    rename($file, "$extractPath/$file_basename");
-                }
-                rmdir("$extractPath/$filename");
-            }
-        }
+        $zip->extractTo($extractPath);
         $zip->close();
         echo json_encode(['success' => true]);
     } else {
