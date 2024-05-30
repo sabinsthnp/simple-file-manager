@@ -147,14 +147,19 @@ if($_GET['do'] == 'list') {
 	readfile($file);
 	exit;
 }elseif ($_POST['do'] == 'unzip') {
+    $folder = $_POST['folder'];
     $zip = new ZipArchive;
     $res = $zip->open($file);
     if ($res === TRUE) {
-        $zip->extractTo(dirname($file));
+        $extractPath = dirname($file) . '/' . $folder;
+        if (!is_dir($extractPath)) {
+            mkdir($extractPath, 0777, true);
+        }
+        $zip->extractTo($extractPath);
         $zip->close();
         echo json_encode(['success' => true]);
     } else {
-        echo json_encode(['success' => false]);
+        echo json_encode(['success' => false, 'error' => 'Failed to open ZIP file']);
     }
     exit;
 }
@@ -423,7 +428,8 @@ $(function(){
 });
 
 	$('#table').on('click','.unzip',function(data) {
-		$.post("",{'do':'unzip',file:$(this).attr('data-file'),xsrf:XSRF},function(response){
+		var folder = prompt("Folder name: ");
+		$.post("",{'do':'unzip','folder':folder,file:$(this).attr('data-file'),xsrf:XSRF},function(response){
 			list();
 		},'json');
 		return false;
