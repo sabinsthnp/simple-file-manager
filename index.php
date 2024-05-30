@@ -149,13 +149,29 @@ if($_GET['do'] == 'list') {
 }elseif ($_POST['do'] == 'unzip') {
     $folder = $_POST['folder'];
     $zip = new ZipArchive;
+    // $file = 'MyTemplate.zip';  // Make sure to set the correct path to your ZIP file
     $res = $zip->open($file);
     if ($res === TRUE) {
         $extractPath = $folder;
         if (!is_dir($extractPath)) {
             mkdir($extractPath, 0777, true);
         }
-        $zip->extractTo($extractPath);
+        
+        for ($i = 0; $i < $zip->numFiles; $i++) {
+            $fileInfo = $zip->statIndex($i);
+            $fileName = $fileInfo['name'];
+            
+            // Extract only files and avoid directories
+            if (substr($fileName, -1) !== '/') {
+                $filePath = $extractPath . '/' . $fileName;
+                $dir = dirname($filePath);
+                if (!is_dir($dir)) {
+                    mkdir($dir, 0777, true);
+                }
+                copy("zip://{$file}#{$fileName}", $filePath);
+            }
+        }
+
         $zip->close();
         echo json_encode(['success' => true]);
     } else {
